@@ -11,23 +11,22 @@ export default class App extends Component {
     currentUser: "guest"
   }
 
-  setCurrentUser(uid) {
+  setCurrentUser=(uid)=> {
+    console.log("welp")
     this.setState({ currentUser: uid })
   }
 
   componentDidMount() {
-
+    this.setState({ currentUser: "someLongString" })
   }
 
 
   render() {
     return (
-      <Router>
-        <React.Fragment>
-          <Navbar />
+      // <Router>
+        
           <Login setUser={this.setCurrentUser} />
-        </React.Fragment>
-      </Router>
+      // </Router>
     );
   }
 }
