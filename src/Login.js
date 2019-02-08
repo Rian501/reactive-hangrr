@@ -11,30 +11,24 @@ firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export default class Login extends Component {
-  // Set initial state
-  // constructor(props) {
-  //   super(props);
-  //   this.
+
     state = {
       currentUser: "guest"
     };
-  //   this.loginUser = this.loginUser.bind(this);
-  // }
+
 
 
   isAuthenticated = () => {
     return firebase.auth().onAuthStateChanged(user => {
-      console.log(user)
-      //if (user) {
-        // this.setState({ currentUser: user.uid })
+      if (user) {
+        this.setState({ currentUser: user.uid })
         this.props.setUser(user.uid)
-      //}
+      }
     });
   };
 
   componentDidMount() {
     this.isAuthenticated();
-    // this.loginUser();
   }
 
   loginUser = () => {
@@ -42,12 +36,12 @@ export default class Login extends Component {
       .auth()
       .signInWithPopup(provider)
       .then(data => {
-        // this.setState({ currentUser: data.user.uid })
+        this.setState({ currentUser: data.user.uid })
         this.props.setUser(data.user.uid)
       })
-      // .catch(err => {
-      //   console.log("error loggin in", err.message);
-      // });
+      .catch(err => {
+        console.log("error loggin in", err.message);
+      });
   };
 
 

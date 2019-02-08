@@ -1,5 +1,6 @@
 import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
+import Login from "./Login";
 
 export default class ApplicationViews extends Component {
   state = {
@@ -19,6 +20,8 @@ export default class ApplicationViews extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* All the routes go here */}
+        <Login setUser={this.props.setCurrentUser} />
 
       </React.Fragment>
     );
