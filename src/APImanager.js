@@ -9,8 +9,9 @@ const APIman = Object.create({}, {
   },
   fetchAPISuggestions: {
     value: function (userLoc) {
+      console.log(userLoc)
       return fetch(
-        `https://emlemproxy.herokuapp.com/api/places/nearbysearch/json?location=${userLoc.lat},${userLoc.long}&radius=7800&opennow=true&type=restaurant&keyword=&key=${keyObj.PlacesAPI}`
+        `https://emlemproxy.herokuapp.com/api/places/nearbysearch/json?location=${userLoc.lat},${userLoc.lng}&radius=7800&opennow=true&type=restaurant&keyword=food&key=${keyObj.PlacesAPI}`
       ).then(r => r.json())
     }
   }
