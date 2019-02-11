@@ -37,6 +37,7 @@ export default class SuggestionBox extends Component {
       APIman.fetchAPISuggestions(userLoc)
         .then(response => {
           console.log(response.results)
+          this.setState({suggestions: response.results})
         })
     })
 
