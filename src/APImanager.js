@@ -8,6 +8,7 @@ const APIman = Object.create({}, {
     value: 'https://emlemproxy.herokuapp.com/api/'
   },
   fetchAPISuggestions: {
+    //adjust radius, also type? keyword?
     value: function (userLoc) {
       console.log(userLoc)
       return fetch(
