@@ -33,21 +33,6 @@ export default class App extends Component {
     }
   };
 
-getDay = () => {
-  //0 is Sunday in this model, but I want 0 to be Mon and 6 to be Sun
-  let today = null;
-  var d = new Date();
-  var n = d.getDay();
-  if (n !== 0) {
-    today = n - 1;
-  } else {
-    today = 6;
-  }
-  return today;
-};
-
-
-
 componentDidMount() {
   this.setState({ currentUser: "someLongString" })
   this.locateUser();
