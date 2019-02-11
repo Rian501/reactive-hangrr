@@ -1,0 +1,10 @@
+const APIman = Object.create({}, {
+
+
+
+
+
+
+
+
+})
