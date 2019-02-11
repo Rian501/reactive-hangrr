@@ -2,12 +2,12 @@ import hiddenKeys from "./values"
 import firebase from "firebase"
 import React, { Component } from "react";
 
-const config = {
-  apiKey: hiddenKeys.FirebaseKey,
-  authDomain: hiddenKeys.FirebaseAuthDomain
-}
+// const config = {
+//   apiKey: hiddenKeys.FirebaseKey,
+//   authDomain: hiddenKeys.FirebaseAuthDomain
+// }
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export default class Login extends Component {

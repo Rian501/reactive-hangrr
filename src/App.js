@@ -3,16 +3,33 @@ import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from "./Navbar";
 import ApplicationViews from "./ApplicationViews";
+import firebase from "firebase"
+import hiddenKeys from "./values"
 
+const config = {
+  apiKey: hiddenKeys.FirebaseKey,
+  authDomain: hiddenKeys.FirebaseAuthDomain
+}
+
+firebase.initializeApp(config);
+const provider = new firebase.auth.GoogleAuthProvider();
 
 export default class App extends Component {
   state = {
     currentUser: "guest",
-    userLoc: {
-      lat: 0,
-      lang: 0
-    }
+
   }
+
+  isAuthenticated = () => {
+    return firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ currentUser: user.uid })
+      }
+    });
+  };
+
+
+
 
   setCurrentUser = (uid) => {
     console.log("welp")
@@ -20,48 +37,23 @@ export default class App extends Component {
   }
 
 
-  locateUser = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition( (position) => {
-        let userLoc={}
-        userLoc.lat = position.coords.latitude;
-        userLoc.lng = position.coords.longitude;
-        this.setState({ userLoc });
-      });
-    } else {
-      console.log("Your browser does not seem to support geolocation!");
-    }
-  };
-
-getDay = () => {
-  //0 is Sunday in this model, but I want 0 to be Mon and 6 to be Sun
-  let today = null;
-  var d = new Date();
-  var n = d.getDay();
-  if (n !== 0) {
-    today = n - 1;
-  } else {
-    today = 6;
+  
+  componentDidMount() {
+    this.isAuthenticated();
   }
-  return today;
-};
 
 
-
-componentDidMount() {
-  this.setState({ currentUser: "someLongString" })
-  this.locateUser();
-}
-
-
-render() {
-  return (
-    <Router>
-      <React.Fragment>
-        <Navbar />
-        <ApplicationViews setCurrentUser={this.setCurrentUser} />
-      </React.Fragment>
-    </Router>
-  );
-}
+  render() {
+    return (
+      <Router>
+        <React.Fragment>
+          <Navbar />
+          <ApplicationViews
+            setCurrentUser={this.setCurrentUser}
+            currentUser={this.state.currentUser}
+            userLoc={this.state.userLoc} />
+        </React.Fragment>
+      </Router>
+    );
+  }
 }
