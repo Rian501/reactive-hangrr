@@ -1,6 +1,7 @@
 import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import Login from "./Login";
+import SuggestionBox from "./SuggestionBox";
 
 export default class ApplicationViews extends Component {
   state = {
@@ -34,8 +35,21 @@ export default class ApplicationViews extends Component {
     return (
       <React.Fragment>
         {/* All the routes go here */}
-        <Login setUser={this.props.setCurrentUser} />
+        <Route path="/login"
+          render={props => {
+            return <Login {...props} setUser={this.props.setCurrentUser} />
+          }} />
 
+        <Route
+          exact
+          path="/"
+          render={props => {
+            return <SuggestionBox 
+              today={this.state.today} 
+              currentUser={this.props.currentUser}
+              userLoc={this.props.userLoc} />;
+          }}
+        />
       </React.Fragment>
     );
   }
