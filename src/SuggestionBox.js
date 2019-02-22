@@ -32,6 +32,7 @@ export default class SuggestionBox extends Component {
   };
 
   componentDidMount() {
+    console.log("thisPropscurrentuser?", this.props.currentUser)
     this.locateUser()
     .then(userLoc => {
       console.log(userLoc)
@@ -40,13 +41,22 @@ export default class SuggestionBox extends Component {
           console.log(response.results)
           this.setState({suggestions: response.results})
         })
-      APIman.getBlacklist("hPpD42vypvV045Y22zHriSZ7mSk1")
-      // .then((listo) => {
-      //   console.log(listo)
-      // })
+
     })
  }
 
+ componentDidUpdate (prevProps) {
+   if (prevProps.currentUser !== this.props.currentUser){
+     APIman.getBlacklist(this.props.currentUser)
+       .then((listo) => {
+         console.log("nopes", listo)
+       })
+     APIman.getTryLaters(this.props.currentUser)
+       .then((listo) => {
+         console.log("yeps", listo)
+       })
+   }
+ }
 
   render() {
     return (

@@ -1,9 +1,9 @@
 import keyObj from "./values";
 
 const APIman = Object.create({}, {
-  FirebaseURL: {
-    value: 'https://whereshouldweeat-369b9.firebaseio.com/'
-  },
+  // FirebaseURL: {
+  //   value: 'https://whereshouldweeat-369b9.firebaseio.com/'
+  // },
   proxyURL: {
     value: 'https://emlemproxy.herokuapp.com/api/'
   },
@@ -21,7 +21,13 @@ const APIman = Object.create({}, {
       console.log("UIDDDDD", uid)
       return fetch(`https://whereshouldweeat-369b9.firebaseio.com/blacklist.json?orderBy="uid"&equalTo="${uid}"`)
         .then(r => r.json())
-        .then(res => console.log(res))
+    }
+  },
+  getTryLaters: {
+    value: function (uid) {
+      console.log("UIDDDDD", uid)
+      return fetch(`https://whereshouldweeat-369b9.firebaseio.com/trylater.json?orderBy="uid"&equalTo="${uid}"`)
+        .then(r => r.json())
     }
   }
 })
