@@ -9,7 +9,8 @@ export default class SuggestionBox extends Component {
       lat: 0,
       long: 0
     },
-    suggestions: []
+    suggestions: [],
+    blacklist: []
   };
 
   locateUser = () => {
@@ -31,20 +32,34 @@ export default class SuggestionBox extends Component {
   };
 
   componentDidMount() {
+    console.log("thisPropscurrentuser?", this.props.currentUser)
     this.locateUser()
     .then(userLoc => {
       console.log(userLoc)
       APIman.fetchAPISuggestions(userLoc)
         .then(response => {
-          console.log(response.results)
           this.setState({suggestions: response.results})
         })
-    })
 
-  }
+    })
+ }
+
+ componentDidUpdate (prevProps) {
+   if (prevProps.currentUser !== this.props.currentUser){
+     APIman.getBlacklist(this.props.currentUser)
+       .then((listo) => {
+         this.setState({blacklist: listo})
+       })
+     APIman.getTryLaters(this.props.currentUser)
+       .then((listo) => {
+         this.setState({trylaters: listo})
+       })
+   }
+ }
 
   render() {
     return (
+
       <p>This is a suggestion box</p>
     );
   }
