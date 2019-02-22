@@ -38,7 +38,6 @@ export default class SuggestionBox extends Component {
       console.log(userLoc)
       APIman.fetchAPISuggestions(userLoc)
         .then(response => {
-          console.log(response.results)
           this.setState({suggestions: response.results})
         })
 
@@ -49,12 +48,10 @@ export default class SuggestionBox extends Component {
    if (prevProps.currentUser !== this.props.currentUser){
      APIman.getBlacklist(this.props.currentUser)
        .then((listo) => {
-         console.log("nopes", listo)
          this.setState({blacklist: listo})
        })
      APIman.getTryLaters(this.props.currentUser)
        .then((listo) => {
-         console.log("yeps", listo)
          this.setState({trylaters: listo})
        })
    }
@@ -62,6 +59,7 @@ export default class SuggestionBox extends Component {
 
   render() {
     return (
+
       <p>This is a suggestion box</p>
     );
   }
