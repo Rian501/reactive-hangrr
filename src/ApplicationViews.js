@@ -47,7 +47,6 @@ export default class ApplicationViews extends Component {
             return <SuggestionBox 
               today={this.state.today} 
               currentUser={this.props.currentUser}
-              // userLoc={this.props.userLoc} 
               />;
           }}
         />

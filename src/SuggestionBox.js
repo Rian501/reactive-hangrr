@@ -50,10 +50,12 @@ export default class SuggestionBox extends Component {
      APIman.getBlacklist(this.props.currentUser)
        .then((listo) => {
          console.log("nopes", listo)
+         this.setState({blacklist: listo})
        })
      APIman.getTryLaters(this.props.currentUser)
        .then((listo) => {
          console.log("yeps", listo)
+         this.setState({trylaters: listo})
        })
    }
  }
