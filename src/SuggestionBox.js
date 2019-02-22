@@ -9,7 +9,8 @@ export default class SuggestionBox extends Component {
       lat: 0,
       long: 0
     },
-    suggestions: []
+    suggestions: [],
+    blacklist: []
   };
 
   locateUser = () => {
@@ -39,9 +40,13 @@ export default class SuggestionBox extends Component {
           console.log(response.results)
           this.setState({suggestions: response.results})
         })
+      APIman.getBlacklist("hPpD42vypvV045Y22zHriSZ7mSk1")
+      // .then((listo) => {
+      //   console.log(listo)
+      // })
     })
+ }
 
-  }
 
   render() {
     return (
